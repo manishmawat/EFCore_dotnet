@@ -3,6 +3,7 @@ using System;
 using EFCore_dotnet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore_dotnet.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    partial class EmployeeContextModelSnapshot : ModelSnapshot
+    [Migration("20211228062533_mig1")]
+    partial class mig1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -62,9 +64,12 @@ namespace EFCore_dotnet.Migrations
 
             modelBuilder.Entity("EFCore_dotnet.Models.Department", b =>
                 {
-                    b.HasOne("EFCore_dotnet.Models.Employee", null)
+                    b.HasOne("EFCore_dotnet.Models.Employee", "Employee")
                         .WithMany("Departments")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("EFCore_dotnet.Models.Employee", b =>

@@ -17,7 +17,7 @@ namespace EFCore_dotnet.Controllers
         [HttpGet(Name ="GetEmployee")]
         public async Task<JsonResult> Get()
         {
-            var employees = await _context.Employees.ToListAsync();
+            var employees = await _context.Employees.Include(d=>d.Departments).ToListAsync();
             return new JsonResult(employees);
         }
         [HttpPost(Name ="CreateEmployee")]

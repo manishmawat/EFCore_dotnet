@@ -17,13 +17,5 @@ namespace EFCore_dotnet.Data
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Employee>()
-                .HasMany(c => c.Departments)
-                .WithOne(e => e.Employee)
-                .OnDelete(DeleteBehavior.Cascade);
-        }
     }
 }
