@@ -54,9 +54,9 @@ namespace EFCore_dotnet.Controllers
             {
                 employee.Departments.Remove(department);
             }
-            var info = _context.Employees.Remove(employee);
+            _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
-            return new JsonResult(info);
+            return new JsonResult("Record deleted");
         }
     }
 }
